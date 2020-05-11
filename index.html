@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet"
+        href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+        integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+        integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+        integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
+        crossorigin="anonymous"></script>
+
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <!-- CSS file -->
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/70b95019d0.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <!-- fixed navbar up top  -->
+            <nav class="navbar-nav bg-light my-2">
+                <!-- input group for all the inputs -->
+                <div class="input-group my-1">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text mx-3 " id="chooseCity">
+                            <h5>Choose a City: </h5>
+                        </span>
+                    </div>
+                    <!-- dropdown for cities -->
+                    <button class="btn btn-raised btn-success dropdown-toggle mx-3 " type="button" id="citiesBtn"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Cities
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item city" type="button" data-city="all">all</button>
+                        <button class="dropdown-item city" type="button" data-city="Boise">Boise</button>
+                        <button class="dropdown-item city" type="button" data-city="DC">Washington DC</button>
+                        <button class="dropdown-item city" type="button" data-city="Honolulu">Honolulu</button>
+                        <button class="dropdown-item city" type="button" data-city="Houston">Houston</button>
+                        <button class="dropdown-item city" type="button" data-city="LA">Los Angeles</button>
+                        <button class="dropdown-item city" type="button" data-city="LV">Las Vegas</button>
+                        <button class="dropdown-item city" type="button" data-city="Phoenix">Phoenix</button>
+                        <button class="dropdown-item city" type="button" data-city="Portland">Portland</button>
+                        <button class="dropdown-item city" type="button" data-city="Seattle">Seattle</button>
+                        <button class="dropdown-item city" type="button" data-city="SF">San Francisco</button>
+                    </div>
+                    <!-- input for- query items -->
+                    <input type="text" class="form-control mr-3" placeholder="Search an item" id="product"
+                        aria-label="product" aria-describedby="basic-addon2">
+                    <!-- search button -->
+                    <div class="input-group-append">
+                        <button class="btn btn-success bmd-btn-fab" type="button" id="searchBtn"><i
+                                class="fas fa-search material-icons"></i></button>
+                    </div>
+                    <!-- modal for input validation -->
+                    <div class="modal" id="validation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true" data-backdrop="false">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="error">Error: Invalid Input</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Please type one of the following: eggs, milk, bread, orange juice (oj), rice, steak,
+                                    or butter.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-raised btn-secondary"
+                                        data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+        </div>
+        </nav>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- nutrition info  -->
+                <div id="nutrition" class="card">
+                    <div class="card-header" id="itemName">
+                        Nutrition facts
+                    </div>
+                    <div class="card-body">
+                        <!-- nutrition list. ajax  -->
+                        <ul class="list-group">
+                            <li class="list-group-item">Brand name: <span
+                                    class="label label-default label-pill pull-xs-right" id="brandName"></span></li>
+                            <li class="list-group-item">Calcium: <span
+                                    class="label label-default label-pill pull-xs-right" id="calcium"> </span> DV</li>
+                            <li class="list-group-item">Calories: <span
+                                    class="label label-default label-pill pull-xs-right" id="calories"></span> kcal</li>
+                            <li class="list-group-item">Cholesterol: <span
+                                    class="label label-default label-pill pull-xs-right" id="cholesterol"></span> mg
+                            </li>
+                            <li class="list-group-item">Dietary fiber: <span
+                                    class="label label-default label-pill pull-xs-right" id="df"></span> g</li>
+                            <li class="list-group-item">Iron: <span class="label label-default label-pill pull-xs-right"
+                                    id="iron"></span> DV</li>
+                            <li class="list-group-item">Protein: <span
+                                    class="label label-default label-pill pull-xs-right" id="protein"></span> g</li>
+                            <li class="list-group-item">Saturated fat: <span
+                                    class="label label-default label-pill pull-xs-right" id="saturated"></span> g</li>
+                            <li class="list-group-item">Sodium: <span
+                                    class="label label-default label-pill pull-xs-right" id="sodium"></span> mg</li>
+                            <li class="list-group-item">Sugars: <span
+                                    class="label label-default label-pill pull-xs-right" id="sugars"></span> g</li>
+                            <li class="list-group-item">Total Carbohydrate: <span
+                                    class="label label-default label-pill pull-xs-right" id="carbs"></span> g</li>
+                            <li class="list-group-item">Total fat: <span
+                                    class="label label-default label-pill pull-xs-right" id="fat"></span> g</li>
+                            <li class="list-group-item">Trans fatty acid: <span
+                                    class="label label-default label-pill pull-xs-right" id="trans"></span> g</li>
+                            <li class="list-group-item">Vitamin A: <span
+                                    class="label label-default label-pill pull-xs-right" id="a"></span> DV</li>
+                            <li class="list-group-item">Vitamin C: <span
+                                    class="label label-default label-pill pull-xs-right" id="c"></span> DV</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-7">
+    
+
+                <!-- Calories calculator  -->
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Brand Name</th>
+                            <th scope="col">Calories</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Calories Efficiency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- tr th and td elements added by ajax   -->
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-2">
+                <!-- modal button for instruction -->
+                <button type="button" class="btn btn-raised btn-success btn-largemy-3 my-3" data-toggle="modal"
+                    data-target="#myModal">
+                    Instructions
+                </button>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel">Calories Efficiency Calculator</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Welcome to Calories Efficiency calculator</h5>
+                                <p>To search for a grocery item: </p>
+                                <ul>
+                                    <li>Select a city </li>
+                                    <li>Type in one of the items: eggs, milk, bread, orange juice (oj), rice, steak, or
+                                        butter</li>
+                                    <li>Press the search button</li>
+                                </ul>
+                                <p> Search the item twice to log it onto the table below.</p>
+                                <p>Note: We only offer a limited number of cities and grocery items. Hopefully, the list
+                                    grows over time.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- card for product img -->
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top img-thumbnail" src="https://via.placeholder.com/150" id="productImg"
+                        alt="Card image cap">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+    </div>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
