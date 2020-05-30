@@ -1,4 +1,4 @@
-# randomname-2020-05-pro-01-sjl# randomname-2020-05-pro-01
+# RU-2020-PRO-01-SJL
 
 ## Projet name : Health product scanner: Healthy Eats 
 
